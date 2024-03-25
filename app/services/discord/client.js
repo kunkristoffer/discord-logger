@@ -1,7 +1,7 @@
 
 import { Client, Events, GatewayIntentBits } from 'discord.js'
 import { TOKEN, GUILD_ID, CHANNEL_ID } from '../../config/index.js'
-import postMessage from '../mongodb/post/message.js'
+import updateAttendance from '../mongodb/post/attendance.js'
 
 const discordBot = () => {
   const client = new Client({
@@ -16,6 +16,7 @@ const discordBot = () => {
     // Log in to Discord with your client's token
     client.login(TOKEN)
 
+    // Console log if connection is successfull
     client.once(Events.ClientReady, readyClient => {
       console.log(`Discord.js is Ready! Logged in as ${readyClient.user.tag}`)
     })
@@ -24,6 +25,7 @@ const discordBot = () => {
     console.log('Error connecting to discord')
   }
 
+  // Function fires when a user writes a message
   client.on("messageCreate", event => {
     // Only run function in specified guild & channel to avoid cross contamination
     if (event.guildId === GUILD_ID & event.channelId === CHANNEL_ID) {
@@ -35,7 +37,7 @@ const discordBot = () => {
       }
 
       // Send payload to mongoDB post handler
-      postMessage(payload)
+      updateAttendance(payload)
     }
   })
 }
