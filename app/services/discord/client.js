@@ -1,9 +1,10 @@
 
 import { Client, Events, GatewayIntentBits } from 'discord.js'
 import { TOKEN, GUILD_ID, CHANNEL_ID } from '../../config/index.js'
+import postMessage from '../mongodb/post/message.js'
 
-const discord = () => {
-  const bot = new Client({
+const discordBot = () => {
+  const client = new Client({
     intents: [
       GatewayIntentBits.Guilds,
       GatewayIntentBits.GuildMessages,
@@ -11,27 +12,33 @@ const discord = () => {
     ]
   })
 
-  bot.once(Events.ClientReady, readyClient => {
-    console.log(`Discord.js is Ready! Logged in as ${readyClient.user.tag}`);
-  })
+  try {
+    // Log in to Discord with your client's token
+    client.login(TOKEN)
 
-  bot.on("messageCreate", message => {
+    client.once(Events.ClientReady, readyClient => {
+      console.log(`Discord.js is Ready! Logged in as ${readyClient.user.tag}`)
+    })
+  }
+  catch (err) {
+    console.log('Error connecting to discord')
+  }
+
+  client.on("messageCreate", event => {
     // Only run function in specified guild & channel to avoid cross contamination
-    if (message.guildId === GUILD_ID & message.channelId === CHANNEL_ID) {
+    if (event.guildId === GUILD_ID & event.channelId === CHANNEL_ID) {
       // Creates a payload for database insertion
       const payload = {
-        user: message.author.id,
-        time: Date.now(),
-        content: message.content
+        user: event.author.id,
+        timestamp: event.createdTimestamp,
+        message: event.content
       }
 
-      console.log(payload)
+      // Send payload to mongoDB post handler
+      postMessage(payload)
     }
   })
-
-  // Log in to Discord with your client's token
-  bot.login(TOKEN)
 }
 
 // Export this discord bot for use in main.js > express
-export default discord
+export default discordBot
