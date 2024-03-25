@@ -18,9 +18,8 @@ const updateAttendance = async (payload) => {
     try {
       documentExists.messages.push(payload)
       await documentExists.save()
-      console.log("updated entry")
     } catch (err) {
-      console.log(err.message)
+      console.log('An error occoured while updating attendance', err.message)
     }
   }
 
@@ -29,9 +28,8 @@ const updateAttendance = async (payload) => {
     try {
       const attendance = new AttendanceModel({...document, messages: [payload]})
       await attendance.save()
-      console.log("Created entry")
     } catch (err) {
-      console.log(err.message)
+      console.log('An error occoured while creating attendance entry', err.message)
     }
   }
 }
