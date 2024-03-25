@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 
 const MessageSchema = new mongoose.Schema({
   user: {
-    type: Number,
+    type: String,
     required: true,
   },
   timestamp: {
@@ -15,6 +15,6 @@ const MessageSchema = new mongoose.Schema({
   },
 })
 
-const MessageModel = mongoose.model('Message', MessageSchema)
+// const MessageModel = mongoose.model('Message', MessageSchema)
 
-export default MessageModel
+export default MessageSchema
