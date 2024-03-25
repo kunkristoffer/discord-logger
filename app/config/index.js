@@ -1,8 +1,12 @@
 import * as dotenv from 'dotenv'
 dotenv.config()
 
+// Express config
+export const EXPRESS_PORT = process.env.EXPRESS_PORT
+
 // MongoDB config
 export const DB_KEY = process.env.MONGODB_KEY
+export const MONGODB_URL = process.env.MONGODB_URL
 
 // DiscordJS config
 export const TOKEN = process.env.DISCORD_BOT_TOKEN
