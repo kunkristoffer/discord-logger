@@ -4,6 +4,6 @@ export const getRandomFromArray = (arr) => {
 }
 
 // Retturns random number from between
-export const getRandomNumberBetween = (start, end) => {
-  return Math.floor(Math.random() * (end - start + 1) + start)
+export const getRandomNumberBetween = (from, to) => {
+  return Math.floor(Math.random() * (to - from) + from)
 }
