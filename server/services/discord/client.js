@@ -3,7 +3,7 @@ import { Client, Events, GatewayIntentBits } from 'discord.js'
 import { TOKEN, GUILD_ID, CHANNEL_ID } from '../../config/index.js'
 import updateAttendance from '../mongodb/post/attendance.js'
 
-const discordBot = () => {
+const connectDiscordBot = () => {
   const client = new Client({
     intents: [
       GatewayIntentBits.Guilds,
@@ -43,4 +43,4 @@ const discordBot = () => {
 }
 
 // Export this discord bot for use in main.js > express
-export default discordBot
+export default connectDiscordBot
