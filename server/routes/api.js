@@ -3,9 +3,9 @@ import express from 'express'
 import { __dirname } from '../main.js'
 
 // Api files
-import postMessage from '../api/create/message.js'
-import { getUserById, getUsers } from './../api/get/user.js'
-import getAttendance from '../api/get/attendance.js'
+import postMessage from '../services/mongodb/create/message.js'
+import { getUserById, getUsers } from '../services/mongodb/get/user.js'
+import getAttendance from '../services/mongodb/get/attendance.js'
 
 // Utils
 import { dateToHourMinute } from '../utils/convertTimestamp.js'

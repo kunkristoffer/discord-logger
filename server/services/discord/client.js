@@ -1,7 +1,7 @@
 
 import { Client, Events, GatewayIntentBits } from 'discord.js'
 import { TOKEN, GUILD_ID, CHANNEL_ID } from '../../config/index.js'
-import updateAttendance from '../mongodb/post/attendance.js'
+import updateAttendance from '../mongodb/create/attendance.js'
 
 const connectDiscordBot = () => {
   const client = new Client({

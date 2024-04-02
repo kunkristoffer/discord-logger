@@ -1,4 +1,4 @@
-import { AttendanceModel } from "../../models/attendance.js"
+import { AttendanceModel } from "../../../models/attendance.js"
 
 
 const getAttendance = async (params) => {

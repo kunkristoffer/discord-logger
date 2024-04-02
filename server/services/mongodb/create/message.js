@@ -1,6 +1,6 @@
-import { MessageModel } from '../../models/message.js'
-import { AttendanceModel } from '../../models/attendance.js'
-import { UserModel } from '../../models/user.js'
+import { MessageModel } from '../../../models/message.js'
+import { AttendanceModel } from '../../../models/attendance.js'
+import { UserModel } from '../../../models/user.js'
 
 const validDate = (date) => {
   return date instanceof Date && !isNaN(date)
