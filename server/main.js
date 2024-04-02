@@ -24,14 +24,14 @@ const client = express()
 // const corsOptions = { origin: "http://localhost:3000" }
 
 // Initilize dependencies
-server.use(cors({ origin: "http://localhost:3000" }))
+server.use(cors({ origin: "http://localhost:" + EXPRESS_CLIENT_PORT }))
 server.use(express.json())
 
 // Connect to mongoDB with mongoose
 connectDB(MONGODB_URL + MONGODB_DB)
 
 // Start discord.js bot
-// connectDiscordBot()
+connectDiscordBot()
 
 // Define static path for client assets
 client.use(express.static(path.join(__dirname, '../client/dist')))
