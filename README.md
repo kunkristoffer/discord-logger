@@ -1,11 +1,10 @@
 # discord-logger
 A discord bot with a web interface for logging discord chat interactions built using [DiscordJS]() and [Vue](), utilizing [Express](), [Node]() and [MongoDB](https://www.mongodb.com/try/download/community).
 
-
-
 ### Database and security
 This project uses MongoDB to store data gathered trough Discord, while you can connect trough different services while cloning this repo, the code might need refactoring.
-
+### Vue.JS
+This repo includes a full version of Vue.JS in the `client` folder, however only the `client/dist` is used by the server. If you want to update the html pages you'll have to run the Vue Vite build command to generate new files. You can find more information in the `README.md` file in that folder.
 
 # Running this application
 ### 1. Clone/download files
