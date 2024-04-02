@@ -1,10 +1,10 @@
 
 import { Client, Events, GatewayIntentBits } from 'discord.js'
-import { TOKEN, GUILD_ID, CHANNEL_ID } from '../../config/index.js'
-import updateAttendance from '../mongodb/create/attendance.js'
+import { DISCORD_TOKEN, DISCORD_GUILD_ID, DISCORD_CHANNEL_ID } from '../../config/index.js'
+import postMessage from '../mongodb/create/message.js'
 
 const connectDiscordBot = () => {
-  const client = new Client({
+  const discordClient = new Client({
     intents: [
       GatewayIntentBits.Guilds,
       GatewayIntentBits.GuildMessages,
@@ -14,10 +14,10 @@ const connectDiscordBot = () => {
 
   try {
     // Log in to Discord with your client's token
-    client.login(TOKEN)
+    discordClient.login(DISCORD_TOKEN)
 
     // Console log if connection is successfull
-    client.once(Events.ClientReady, readyClient => {
+    discordClient.once(Events.ClientReady, readyClient => {
       console.log(`Discord.js is Ready! Logged in as ${readyClient.user.tag}`)
     })
   }
@@ -26,18 +26,11 @@ const connectDiscordBot = () => {
   }
 
   // Function fires when a user writes a message
-  client.on("messageCreate", event => {
+  discordClient.on("messageCreate", event => {
     // Only run function in specified guild & channel to avoid cross contamination
-    if (event.guildId === GUILD_ID & event.channelId === CHANNEL_ID) {
-      // Creates a payload for database insertion
-      const payload = {
-        user: event.author.id,
-        timestamp: event.createdTimestamp,
-        message: event.content
-      }
-
-      // Send payload to mongoDB post handler
-      updateAttendance(payload)
+    if (event.guildId === DISCORD_GUILD_ID && event.channelId === DISCORD_CHANNEL_ID) {
+      // Send payload to database handler
+      postMessage( event.author.id, event.author.displayName, new Date(event.createdTimestamp), event.content )
     }
   })
 }
