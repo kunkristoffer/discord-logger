@@ -3,8 +3,10 @@
   import { RouterLink } from 'vue-router'
   import Accordion from 'primevue/accordion'
   import AccordionTab from 'primevue/accordiontab'
+  import Button from 'primevue/button'
 
   const data = ref(null)
+  const listAscending = ref(true)
 
   const getAttendance = async () => {
     const response = await fetch('http://localhost:2000/get/attendance/all')
@@ -43,7 +45,12 @@
 
 <template>
   <main>
-    <h1>Attendance list</h1>
+    <div class="title">
+      <h1>Attendance list</h1>
+      <span>
+        <Button :label="listAscending === true ? 'Ascending' : 'Descending'" @click="listAscending = !listAscending; data.reverse()" />
+      </span>
+    </div>
     <img v-if="!data" src="/loading.gif" alt="loading icon">
     <Accordion :multiple="true" :activeIndex="[0]">
       <template v-for="attendance in data" v-bind:key="attendance._id">
@@ -62,6 +69,22 @@
 </template>
 
 <style>
+  .title {
+    display: flex;
+    align-items: center;
+    gap: 5rem;
+
+    :is(button) {
+      padding: 0.5rem;
+      color: #fff;
+      background-color: var(--vt-c-black-soft);
+      border: none;
+      border-radius: 10px;
+    }
+    :is(button):hover {
+      background-color: var(--vt-c-black-mute);
+    }
+  }
   .attendance {
     display: flex;
     flex-flow: column nowrap;
@@ -72,7 +95,7 @@
     gap: 1rem;
     align-items: center;
 
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--vt-c-black-soft);
   }
   .messages {
     display: flex;
