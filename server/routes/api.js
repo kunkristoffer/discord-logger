@@ -14,6 +14,10 @@ import generateMessages from '../utils/generateMessages.js'
 // Create express route
 const apiRouter = express.Router()
 
+apiRouter.get('/', async ( req, res ) => {
+  res.send("Only api requests allowed, have a nice day.")
+})
+
 // Get all attendances entries
 apiRouter.get('/get/attendance/all', async ( req, res ) => {
   const data = await getAttendance()
