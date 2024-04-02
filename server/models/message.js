@@ -1,12 +1,16 @@
-import mongoose from 'mongoose'
+import { Schema, model, Types } from 'mongoose'
 
-const MessageSchema = new mongoose.Schema({
-  user: {
+export const MessageSchema = new Schema({
+  user_ref: {
+    type: Types.ObjectId,
+    ref: 'User'
+  },
+  user_name: {
     type: String,
     required: true,
   },
-  timestamp: {
-    type: Number,
+  date: {
+    type: Date,
     required: true,
   },
   message: {
@@ -15,6 +19,4 @@ const MessageSchema = new mongoose.Schema({
   },
 })
 
-// const MessageModel = mongoose.model('Message', MessageSchema)
-
-export default MessageSchema
+export const MessageModel = model('Message', MessageSchema)

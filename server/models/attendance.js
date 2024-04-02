@@ -1,7 +1,6 @@
-import mongoose from 'mongoose'
-import MessageSchema from './message.js'
+import { Schema, model, Types } from 'mongoose'
 
-const AttendanceSchema = new mongoose.Schema({
+const AttendanceSchema = new Schema({
   year: {
     type: Number,
     required: true,
@@ -14,9 +13,11 @@ const AttendanceSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  messages: [MessageSchema],
+  date: {
+    type: Date,
+    default: Date.now()
+  },
+  messages: [{ type: Types.ObjectId, ref: 'Message' }],
 })
 
-const AttendanceModel = mongoose.model('Attendance', AttendanceSchema)
-
-export default AttendanceModel
+export const AttendanceModel = model('Attendance', AttendanceSchema)
