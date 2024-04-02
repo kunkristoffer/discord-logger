@@ -9,7 +9,7 @@ import getAttendance from '../api/get/attendance.js'
 
 // Utils
 import { dateToHourMinute } from '../utils/convertTimestamp.js'
-import generateMessages from '../utils/tests/generateMessages.js'
+import generateMessages from '../utils/generateMessages.js'
 
 // Create express route
 const apiRouter = express.Router()
