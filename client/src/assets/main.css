@@ -1,0 +1,86 @@
+@import './base.css';
+
+#app {
+  display: flex;
+  flex-flow: column nowrap;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+
+/* Accordion panel */
+.p-accordion {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1rem;
+}
+
+.p-accordion-header {
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  background-color: var(--vt-c-black-soft);
+}
+
+.p-accordion-header:hover {
+  background-color: var(--vt-c-black-mute);
+}
+
+.p-accordion-header-action {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Date panel */
+.p-datepicker {
+  background-color: var(--vt-c-black-mute);
+}
+
+/* Float label */
+.p-float-label {
+  display: block;
+  position: relative;
+}
+
+.p-inputtext {
+	font-size: 1rem;
+	color: #334155;
+	background: #ffffff;
+	padding: 0.5rem 0.75rem;
+	border: 1px solid #cbd5e1;
+	transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s, outline-color 0.2s;
+	appearance: none;
+	border-radius: 6px;
+	outline-color: transparent;
+}
+.p-inputtext:enabled:focus {
+	outline: 1px solid var(--p-focus-ring-color);
+	outline-offset: -1px;
+	box-shadow: none;
+	border-color: #94a3b8;
+}
+
+
+.p-float-label label {
+	position: absolute;
+	pointer-events: none;
+	top: 50%;
+	margin-top: -0.5rem;
+	transition-property: all;
+	transition-timing-function: ease;
+	line-height: 1;
+}
+
+.p-float-label > label {
+	left: 0.75rem;
+	color: #64748b;
+	transition-duration: 0.2s;
+}
+
+.p-float-label:has(input:focus) label, .p-float-label:has(input.p-filled) label, .p-float-label:has(input:autofill) label, .p-float-label:has(textarea:focus) label, .p-float-label:has(textarea.p-filled) label, .p-float-label:has(.p-inputwrapper-focus) label, .p-float-label:has(.p-inputwrapper-filled) label {
+	top: -0.75rem;
+	font-size: 12px;
+}

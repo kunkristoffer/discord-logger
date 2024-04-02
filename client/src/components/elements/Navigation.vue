@@ -1,0 +1,32 @@
+<script setup>
+  import { RouterLink } from 'vue-router'
+</script>
+
+<template>
+  <header>
+    <nav>
+      <RouterLink to="/">Home</RouterLink>
+      <RouterLink to="/attendance">Attendance</RouterLink>
+      <RouterLink to="/users">Users</RouterLink>
+      <RouterLink to="/attendance/create">Create</RouterLink>
+    </nav>
+  </header>
+</template>
+
+<style scoped>
+  nav {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  a {
+    color: var(--vt-c-text-dark-1);
+    text-decoration: none;
+    font-size: 2rem;
+  }
+
+  a:hover {
+    color: var(--vt-c-text-dark-2);
+  }
+</style>
