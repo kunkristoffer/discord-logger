@@ -10,7 +10,7 @@ const updateAttendance = async (payload) => {
   const day = date.getDate()
 
   // Check if document exists in collection
-  const document = { year: year, month: month, day: day+1 }
+  const document = { year: year, month: month, day: day }
   const documentExists = await AttendanceModel.findOne(document)
 
   // Updates document with payload
