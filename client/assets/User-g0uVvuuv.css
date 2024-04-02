@@ -1,0 +1,1 @@
+.user{display:flex;flex-flow:column nowrap;gap:.5rem}.user span{display:flex;gap:1rem}.messages{display:flex;gap:1rem;width:clamp(200px,100%,50svw);white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
