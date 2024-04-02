@@ -31,7 +31,7 @@ const postMessage = async (id, username, date, message) => {
     attendance.save()
 
     // Log message
-    console.log('Successfully added new message with id: ' + post._id)
+    // console.log(`${post.date.toLocaleString()} New message logged: ${post.user_name}: ${post.message}`)
   }
   catch (err) {
     console.log('Error posting message, check logs =>', err.message)
