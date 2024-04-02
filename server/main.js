@@ -37,7 +37,7 @@ connectDiscordBot()
 client.use(express.static(path.join(__dirname, '../client/dist')))
 
 // Handle HTML response
-client.get('/', ( req, res ) => { res.sendFile(path.join(__dirname, '../client/dist/index.html')) })
+client.get('*', ( req, res ) => { res.sendFile(path.join(__dirname, '../client/dist/index.html')) })
 
 // Handle api requests
 server.use('/', apiRouter)
