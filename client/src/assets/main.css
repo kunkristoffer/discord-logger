@@ -36,7 +36,23 @@ main {
 
 /* Date panel */
 .p-datepicker {
+  display: flex;
+  flex-flow: column nowrap;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  gap: 1rem;
   background-color: var(--vt-c-black-mute);
+}
+.p-datepicker-calendar {
+  width: 100%;
+}
+
+.p-datepicker-header,
+.p-timepicker,
+.p-datepicker-buttonbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Float label */
