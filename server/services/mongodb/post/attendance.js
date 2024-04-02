@@ -1,4 +1,4 @@
-import AttendanceModel from "../../../models/attendance.js"
+import { AttendanceModel } from "../../../models/attendance.js"
 
 const updateAttendance = async (payload) => {
   if (payload == undefined) return
