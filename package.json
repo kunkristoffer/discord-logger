@@ -2,10 +2,10 @@
   "name": "discord-logger",
   "version": "0.0.1",
   "type": "module",
-  "main": "app/main.js",
+  "main": "server/main.js",
   "scripts": {
-    "start": "node app/main.js",
-    "dev": "nodemon app/main.js"
+    "start": "node server/main.js",
+    "dev": "nodemon server/main.js"
   },
   "devDependencies": {
     "nodemon": "^3.1.0"
