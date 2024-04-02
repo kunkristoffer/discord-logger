@@ -1,4 +1,4 @@
-import { getRandomFromArray, getRandomNumberBetween } from "../random.js"
+import { getRandomFromArray, getRandomNumberBetween } from "./returnRandom.js"
 
 // Array of names, affixes and messages
 const names = ["Olivia","Emma","Ella","Leah","Sofie","Nora","Sofia","Maja","Alma","Ada","Lucas","Noah","Isak","Oliver","Kasper","Elias","Emil","Jakob","Oskar","Teodor","Marius","Erik","Stian","Camilla","Katerina","Espen"]
