@@ -61,16 +61,22 @@ apiRouter.get('/get/username/:id', async ( req, res ) => {
 
 // Find and return user data with :ID
 apiRouter.get('/get/user/:id', async ( req, res ) => {
-  const user = await getUserById(req.params.id)
-
-  res.send(user)
+  try {
+    const user = await getUserById(req.params.id)
+    res.send(user)
+  } catch (err) {
+    console.log(err.message)
+  }
 })
 
 // Get all users
 apiRouter.get('/get/users', async ( req, res ) => {
-  const user = await getUsers()
-
-  res.send(user)
+  try {
+    const user = await getUsers()
+    res.send(user)
+  } catch (err) {
+    console.log(err.message)
+  }
 })
 
 // HTML response for htmx test. I really hate this, but it'll work for now.
