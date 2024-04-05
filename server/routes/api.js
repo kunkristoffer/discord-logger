@@ -18,15 +18,9 @@ apiRouter.get('/', async ( req, res ) => {
   res.send("Only api requests allowed, have a nice day.")
 })
 
-// Get all attendances entries
-apiRouter.get('/get/attendance/all', async ( req, res ) => {
-  const data = await getAttendance()
-  res.json(data)
-})
-
-// Get attendance for specific date
-apiRouter.get('/get/attendance/:year/:month/:day', async ( req, res ) => {
-  const data = await getAttendance({ year:req.params.year, month:req.params.month, day:req.params.day})
+// Get attendances entries, can be supplied with date range
+apiRouter.post('/get/attendance/', async ( req, res ) => {
+  const data = await getAttendance(req.body)
   res.json(data)
 })
 
