@@ -1,6 +1,7 @@
 import { MessageModel } from '../../../models/message.js'
 import { AttendanceModel } from '../../../models/attendance.js'
 import { UserModel } from '../../../models/user.js'
+import { isUserRemote } from '../../../utils/isRemote.js'
 
 const validDate = (date) => {
   return date instanceof Date && !isNaN(date)
@@ -16,6 +17,7 @@ const postMessage = async (id, username, date, message) => {
 
     // Post message to mongoDB
     const post = new MessageModel({ user_ref:user._id, user_name: username, date:date, message:message })
+    if (isUserRemote(message)) post.tags.push("remote")
     await post.save()
 
     // Update user with ref to post

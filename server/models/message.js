@@ -17,6 +17,9 @@ export const MessageSchema = new Schema({
     type: String,
     required: true,
   },
+  tags: [{
+    type: String,
+  }]
 })
 
 export const MessageModel = model('Message', MessageSchema)
