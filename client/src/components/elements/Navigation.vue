@@ -14,6 +14,9 @@
 </template>
 
 <style scoped>
+  header {
+    padding: 1rem;
+  }
   nav {
     display: flex;
     justify-content: center;

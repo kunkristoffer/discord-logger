@@ -1,6 +1,17 @@
 <script setup>
   import { onMounted, ref } from 'vue'
   import { useRoute } from 'vue-router'
+  import Accordion from 'primevue/accordion'
+  import AccordionTab from 'primevue/accordiontab'
+  import ToggleButton from 'primevue/togglebutton'
+  import Tag from 'primevue/tag'
+  import DataTable from 'primevue/datatable'
+  import Column from 'primevue/column'
+  import Skeleton from 'primevue/skeleton'
+  import Calendar from 'primevue/calendar'
+  import Badge from 'primevue/badge'
+  import FloatLabel from 'primevue/floatlabel'
+  import Button from 'primevue/button'
 
   const route = useRoute()
   const user = ref(null)
@@ -11,7 +22,7 @@
   }
 
   const formatDate = (string) => {
-    return new Date(string).toUTCString()
+    return new Date(string).toLocaleString()
   }
 
   onMounted( async () => {
@@ -30,19 +41,29 @@
         <span>Joined: {{ formatDate(user.joined) }}</span>
         <span>Updated: {{ formatDate(user.updated) }}</span>
         <span>Discord id: {{ user.discord_id }}</span>
+        <span>Discord usernames: [{{ user.user_name }}]</span>
       </div>
-      <ul>
-        <li class="messages" v-for="message in user.messages" v-bind:key="message.user_ref">
-          <span>{{ formatDate(message.date) }}</span>
-          <span>{{ message.user_name }}</span>
-          <span>{{ message.message }}</span>
-        </li>
-      </ul>
+      <DataTable :value="user.messages" size="small" tableStyle="min-width: 50rem" sortMode="multiple">
+        <Column field="date" header="Time" sortable >
+          <template #body="slotProps">
+            {{ formatDate(slotProps.data.date) }}
+          </template>
+        </Column>
+        <Column field="message" header="Message" style="width: 100%" ></Column>
+        <Column field="tags" header="Tags" sortable >
+          <template #body="slotProps">
+            <Tag v-for="tag in slotProps.data.tags" v-bind:key="tag" value="Hjemmekontor"></Tag>
+          </template>
+        </Column>
+      </DataTable>
     </div>
   </main>
 </template>
 
 <style>
+  td {
+    white-space: nowrap;
+  }
   .user {
     display: flex;
     flex-flow: column nowrap;

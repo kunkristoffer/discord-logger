@@ -16,10 +16,11 @@
 
 <template>
   <main>
-    <h1>users</h1>
     <ul>
       <li v-for="user in users" v-bind:key="user._id">
-        <span><RouterLink :to="'/users/' + user._id">{{ user.user_name }}</RouterLink></span>
+        <span>
+          <RouterLink :to="'/users/' + user._id">{{ user.user_name }}</RouterLink>
+        </span>
       </li>
     </ul>
   </main>
