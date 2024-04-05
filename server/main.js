@@ -24,7 +24,7 @@ const client = express()
 // const corsOptions = { origin: "http://localhost:3000" }
 
 // Initilize dependencies
-server.use(cors({ origin: "http://localhost:" + EXPRESS_CLIENT_PORT }))
+server.use(cors({ origin: ["http://localhost:5173", "http://localhost:" + EXPRESS_CLIENT_PORT] }))
 server.use(express.json())
 
 // Connect to mongoDB with mongoose
