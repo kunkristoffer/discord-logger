@@ -1,4 +1,5 @@
-// import 'primevue/resources/themes/aura-light-green/theme.css'
+import 'primeicons/primeicons.css'
+import 'primevue/resources/themes/lara-dark-blue/theme.css'
 import './assets/main.css'
 
 import { createApp } from 'vue'
@@ -17,7 +18,8 @@ app.use(PrimeVue, {
   locale: {
     ...defaultOptions.locale,
     firstDayOfWeek: 1,
-  }
+  },
+  ripple: true,
 })
 
 app.mount('#app')
