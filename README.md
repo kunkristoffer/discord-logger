@@ -42,3 +42,4 @@ You can then add paths for the executables you need.
 
 # Todo
 - Add tags to messages; late, remote, etc...
+- Add user groupings, configurable trough back-end admin panel
