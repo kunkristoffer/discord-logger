@@ -20,16 +20,19 @@ First step is to clone this repo using your favorite cli/editor tool, if you nee
 npm install
 ```
 Locate file named `.env.editme` and remove `.editme` so that the file only is called `.env` In this file you have to fill out all the fields with correct information. I've added usefull tips in that file to help you set it up. For help finding out the specific fields, you can read up on [Discord](https://discord.com/developers/docs/intro) for discord bots, [MongoDB](https://www.mongodb.com/docs/) for database and [ExpressJS](https://expressjs.com/) for express server settings
-### 3. Generating html files
+### 3. Generating html files with VueJs
 ```sh
+npm install
 npm run build
 ```
-navigate to `client` folder and run the command above. This will generate a dist folder that is used for serving html files by the server. This step is required to do if you want to view this application in the browser.
+navigate to `client` folder and run the commands above. This will generate a dist folder that is used for serving html files by the server. This step is required to do if you want to view this application in the browser.
+
+Alternativly you can create your own front-end enviroment. All the api calls can be found inside `server/routes/api.js`
 ### 4. Running the server
 ```sh
 npm run dev
 ```
-This starts a local server, hosting is out of scope for this readme. Try googling.
+This starts a local server, just make sure you're running this command in the root folder of this project. Hosting is out of scope for this readme.
 ### 5. Accessing service
 You can now access this project by going to your favorite browser and visting http://localhost:3000 or by using the port number you've specified for the client/frontend.
 
