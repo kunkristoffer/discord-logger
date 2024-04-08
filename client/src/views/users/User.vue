@@ -12,6 +12,7 @@
   import Badge from 'primevue/badge'
   import FloatLabel from 'primevue/floatlabel'
   import Button from 'primevue/button'
+  import Card from 'primevue/card'
 
   const route = useRoute()
   const user = ref(null)
@@ -34,14 +35,61 @@
   <main>
     <div v-if="!user">Loading...</div>
     <div v-if="user" class="user">
-      <h1>Profile for: {{ user.user_name }}</h1>
-      <div>
-        <span>First name: {{ user.first_name }}</span>
-        <span>Last name: {{ user.last_name }}</span>
-        <span>Joined: {{ formatDate(user.joined) }}</span>
-        <span>Updated: {{ formatDate(user.updated) }}</span>
-        <span>Discord id: {{ user.discord_id }}</span>
-        <span>Discord usernames: [{{ user.user_name }}]</span>
+      <div class="profile">
+        <Card style="width: 50%; overflow: hidden">
+          <template #title>{{ user.user_name }}</template>
+          <template #content>
+            <div class="profile-fields">
+              <span>
+                <b>First name</b>
+                <p>{{ user.first_name || 'undefined' }}</p>
+              </span>
+              <span style="margin-bottom: 0.5rem;">
+                <b>Last name</b>
+                <p>{{ user.last_name || 'undefined' }}</p>
+              </span>
+              <span>
+                <b>Joined</b>
+                <p>{{ formatDate(user.joined) }}</p>
+              </span>
+              <span style="margin-bottom: 0.5rem;">
+                <b>Updated</b>
+                <p>{{ formatDate(user.updated) }}</p>
+              </span>
+              <span>
+                <b>Discord uid</b>
+                <p>{{ user.discord_id }}</p>
+              </span>
+            </div>
+          </template>
+        </Card>
+        <Card style="width: 50%; overflow: hidden">
+          <template #title>Statistics</template>
+          <template #content>
+            <div class="profile-fields">
+              <span>
+                <b>Attendance</b>
+                <p>95%</p>
+              </span>
+              <span style="margin-bottom: 0.5rem;">
+                <b>Absence</b>
+                <p>5%</p>
+              </span>
+              <span>
+                <b>Late</b>
+                <p>10%</p>
+              </span>
+              <span style="margin-bottom: 0.5rem;">
+                <b>Remote</b>
+                <p>20%</p>
+              </span>
+              <span>
+                <b>Avarge checkin</b>
+                <p>08:30</p>
+              </span>
+            </div>
+          </template>
+        </Card>
       </div>
       <DataTable :value="user.messages" size="small" tableStyle="min-width: 50rem" sortMode="multiple">
         <Column field="date" header="Time" sortable >
@@ -67,14 +115,27 @@
   .user {
     display: flex;
     flex-flow: column nowrap;
-    gap: 0.5rem;
+    gap: 1rem;
+  }
+  .profile {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .profile-fields {
+    display: grid;
+    grid-template-columns: auto;
 
+    p {
+      margin: 0.25em;
+      text-align: start;
+    }
     span {
-      display: flex;
-      gap: 1rem;
+      display: grid;
+      grid-auto-columns: minmax(0, 1fr);
+      grid-auto-flow: column;
     }
   }
-
   .messages {
     display: flex;
     gap: 1rem;
