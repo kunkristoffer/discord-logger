@@ -1,7 +1,7 @@
 # Discord-logger
-<a href="client/dist/attendance.jpg"><img src="client/dist/attendance.jpg" width=30% height=30%></a>
-<a href="client/dist/search.jpg"><img src="client/dist/search.jpg" width=30% height=30%></a>
-<a href="client/dist/user.jpg"><img src="client/dist/user.jpg" width=30% height=30%></a>
+<a href="client/public/attendance.jpg"><img src="client/public/attendance.jpg" width=30% height=30%></a>
+<a href="client/public/search.jpg"><img src="client/public/search.jpg" width=30% height=30%></a>
+<a href="client/public/user.jpg"><img src="client/public/user.jpg" width=30% height=30%></a>
 
 A discord bot with a web interface for logging discord chat interactions built using [DiscordJS]() and [Vue](), utilizing [Express](), [Node]() and [MongoDB](https://www.mongodb.com/try/download/community).
 
