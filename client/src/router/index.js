@@ -11,14 +11,20 @@ const router = createRouter({
       path: '/attendance',
       component: () => import('../views/attendance/Index.vue'),
     },{
-      path: '/attendance/create',
-      component: () => import('../views/attendance/Create.vue'),
+      path: '/create',
+      component: () => import('../views/Create.vue'),
     },{
       path: '/users',
       component: () => import('../views/users/Index.vue'),
     },{
       path: '/users/:id',
       component: () => import('../views/users/User.vue'),
+    },{
+      path: '/groups',
+      component: () => import('../views/groups/Index.vue'),
+    },{
+      path: '/groups/:id',
+      component: () => import('../views/groups/Group.vue'),
     },
   ]
 })
