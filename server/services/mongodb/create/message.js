@@ -7,16 +7,16 @@ const validDate = (date) => {
   return date instanceof Date && !isNaN(date)
 }
 
-const logMessage = async (id, date, message) => {
+const logMessage = async (id, username, date, message) => {
   // Validate payload before continuing
   if (!validDate(date)) return console.log('Error updating messages collection, date is invalid or missing')
 
   try {
     // Check if user exists, if not, create
-    const user = await UserModel.findOneAndUpdate({ discord_id: id }, { user_name: username, updated:date }, { new:true, upsert:true })
+    const user = await UserModel.findOneAndUpdate({ discord_id: id }, { discord_username: username, updated:date }, { new:true, upsert:true })
 
     // Post message to mongoDB
-    const post = new MessageModel({ user_ref:user._id, user_name: username, date:date, message:message })
+    const post = new MessageModel({ user_ref:user._id, date:date, message:message })
     if (isUserRemote(message)) post.tags.push("remote")
     await post.save()
 

@@ -5,10 +5,6 @@ export const MessageSchema = new Schema({
     type: Types.ObjectId,
     ref: 'User'
   },
-  user_name: {
-    type: String,
-    required: true,
-  },
   date: {
     type: Date,
     required: true,
