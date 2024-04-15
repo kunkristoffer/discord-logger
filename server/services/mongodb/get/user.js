@@ -12,7 +12,7 @@ export const getUser = async (id) => {
 
 export const getUserById = async (id) => {
   // Search db for user and return user
-  return await UserModel.findById(id).populate('messages').exec()
+  return await UserModel.findById(id).populate('messages').populate('group').exec()
 }
 
 /**
@@ -34,5 +34,5 @@ export const getUserMessages = async (id) => {
  */
 export const getUsers = async (params) => {
   // Search db for user and return user
-  return await UserModel.find(params)
+  return await UserModel.find(params).populate('group')
 }
