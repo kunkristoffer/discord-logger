@@ -5,13 +5,13 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  discord_username: {
+    type: String,
+  },
   first_name: {
     type: String,
   },
   last_name: {
-    type: String,
-  },
-  discord_username: {
     type: String,
   },
   joined: {
@@ -21,7 +21,14 @@ const UserSchema = new Schema({
   updated: {
     type: Date,
   },
-  messages: [{ type: Types.ObjectId, ref: 'Message' }],
+  messages: {
+    type: Types.ObjectId,
+    ref: 'Group'
+  },
+  messages: [{
+    type: Types.ObjectId,
+    ref: 'Message'
+  }],
 })
 
 export const UserModel = model('User', UserSchema)
