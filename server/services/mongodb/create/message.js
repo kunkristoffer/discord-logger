@@ -15,28 +15,30 @@ const logMessage = async (id, username, date, message) => {
     // Check if user exists, if not, create
     const user = await UserModel.findOneAndUpdate({ discord_id: id }, { discord_username: username, updated:date }, { new:true, upsert:true })
 
-    // Post message to mongoDB
-    const post = new MessageModel({ user_ref:user._id, date:date, message:message })
-    if (isUserRemote(message)) post.tags.push("remote")
-    await post.save()
+    // Create new message entry
+    const newMessage = new MessageModel({ user:user._id, date:date, message:message })
+    // If message indicates user is remote, push tag
+    if (isUserRemote(message)) newMessage.tags.push("remote")
+    // Save message in mongoDB
+    await newMessage.save()
 
-    // Update user with ref to post
-    user.messages.push(post._id)
+    // Update user with ref to message
+    user.messages.push(newMessage._id)
     user.save()
 
     // Check if attendance exists, if not, creates entry
     const dateid = { year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate() }
     const attendance = await AttendanceModel.findOneAndUpdate(dateid, {}, { new:true, upsert:true })
 
-    // Update attendance with ref to post
-    attendance.messages.push(post._id)
+    // Update attendance with ref to message
+    attendance.messages.push(newMessage._id)
     attendance.save()
-
-    // Log message
-    // console.log(`${post.date.toLocaleString()} New message logged: ${post.user_name}: ${post.message}`)
   }
   catch (err) {
-    console.log('Error posting message, check logs =>', err.message)
+    console.log('Error logging message, check logs =>', err.message)
+  } finally {
+    // Log message
+    console.log(`${date.toLocaleString()} | New discord message logged | ${username}: ${message}`)
   }
 }
 
