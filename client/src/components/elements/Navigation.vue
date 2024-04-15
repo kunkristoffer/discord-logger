@@ -8,7 +8,8 @@
       <RouterLink to="/">Home</RouterLink>
       <RouterLink to="/attendance">Attendance</RouterLink>
       <RouterLink to="/users">Users</RouterLink>
-      <RouterLink to="/attendance/create">Create</RouterLink>
+      <RouterLink to="/groups">Groups</RouterLink>
+      <RouterLink to="/create">Create_data</RouterLink>
     </nav>
   </header>
 </template>

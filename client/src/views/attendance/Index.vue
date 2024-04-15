@@ -114,6 +114,11 @@
                 <RouterLink :to="'/users/' + slotProps.data.user._id">{{ slotProps.data.user.discord_username }}</RouterLink>
               </template>
             </Column>
+            <Column field="group" header="Group" >
+              <template #body="slotProps">
+                <RouterLink :to="'/users/' + slotProps.data.user.group?.name">{{ slotProps.data.user.group?.name }}</RouterLink>
+              </template>
+            </Column>
             <Column field="message" header="Message" style="width: 100%" ></Column>
             <Column field="tags" header="Tags" sortable >
               <template #body="slotProps">

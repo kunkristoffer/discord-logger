@@ -57,18 +57,17 @@
             <RouterLink :to="'/users/' + slotProps.data._id">{{ slotProps.data.discord_username }}</RouterLink>
           </template>
         </Column>
-        <Column field="discord_username" header="Group" sortable >
+        <Column field="group" header="Group" sortable >
           <template #body="slotProps">
-            <!-- <RouterLink :to="'/group/' + slotProps.data._id">{{ slotProps.data.discord_username }}</RouterLink> -->
-            {{ slotProps.data.discord_username.slice(-3) }}
+            <RouterLink :to="'/groups/' + slotProps.data.group?.name">{{ slotProps.data.group?.name }}</RouterLink>
           </template>
         </Column>
-        <Column field="joined" header="Joined">
+        <Column field="joined" header="Joined" sortable >
           <template #body="slotProps">
             {{ new Date(slotProps.data.joined).toUTCString() }}
           </template>
         </Column>
-        <Column field="updated" header="Updated">
+        <Column field="updated" header="Updated" sortable >
           <template #body="slotProps">
             {{ new Date(slotProps.data.updated).toUTCString() }}
           </template>

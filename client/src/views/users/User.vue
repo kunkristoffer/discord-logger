@@ -63,6 +63,10 @@
                 <b>Discord uid</b>
                 <p>{{ user.discord_id }}</p>
               </span>
+              <span>
+                <b>Group</b>
+                <RouterLink :to="'/groups/' + user.group?.name">{{ user.group?.name }}</RouterLink>
+              </span>
             </div>
           </template>
         </Card>
