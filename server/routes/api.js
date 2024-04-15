@@ -1,10 +1,13 @@
 // Dependencies
-import express from 'express'
+import express, { json } from 'express'
 import { __dirname } from '../main.js'
 
 // Api files
 import postMessage from '../services/mongodb/create/message.js'
+import { createGroup } from '../services/mongodb/create/group.js'
+import { addUserToGroup } from '../services/mongodb/update/group.js'
 import { getUserById, getUsers } from '../services/mongodb/get/user.js'
+import { getGroupById, getGroupByName, getGroups } from '../services/mongodb/get/group.js'
 import getAttendance from '../services/mongodb/get/attendance.js'
 
 // Utils
@@ -39,7 +42,7 @@ apiRouter.post('/post/attendance/testdata', async ( req, res ) => {
   const messages = generateMessages(from, to)
 
   for (let i = 0; i < messages.length; i++) {
-    await postMessage(messages[i].user_ref, messages[i].user_name, messages[i].date, messages[i].message)
+    await postMessage(messages[i].discord_id, messages[i].discord_username, messages[i].date, messages[i].message)
   }
 
   res.json({status: 'success', from: from, to:to, messages: messages})
@@ -68,6 +71,56 @@ apiRouter.get('/get/users', async ( req, res ) => {
   try {
     const user = await getUsers()
     res.send(user)
+  } catch (err) {
+    console.log(err.message)
+  }
+})
+
+// Create group
+apiRouter.post('/post/group', async ( req, res ) => {
+  try {
+    const group = await createGroup(req.body.name)
+
+    if (group) {
+      res.json({ status: 'success', name: group.name, _id: group._id })
+    } else {
+      res.json({ status: 'failed', name: 'name already exists', })
+    }
+  } catch (err) {
+    console.log(err.message)
+  }
+})
+
+// Add user to group
+apiRouter.post('/post/addusertogroup', async ( req, res ) => {
+  try {
+    const response = await addUserToGroup(req.body.user, req.body.group)
+
+    if (response) {
+      res.json({ status: 'success', ...response })
+    } else {
+      res.json({ status: 'failed', message: 'Bad user or group id', })
+    }
+  } catch (err) {
+    console.log(err.message)
+  }
+})
+
+// Get all groups
+apiRouter.get('/get/groups', async ( req, res ) => {
+  try {
+    const groups = await getGroups()
+    res.send(groups)
+  } catch (err) {
+    console.log(err.message)
+  }
+})
+
+// Get specific group
+apiRouter.get('/get/group/:name', async ( req, res ) => {
+  try {
+    const group = await getGroupByName(req.params.name)
+    res.send(group)
   } catch (err) {
     console.log(err.message)
   }
