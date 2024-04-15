@@ -1,7 +1,7 @@
 import { Schema, model, Types } from 'mongoose'
 
 export const MessageSchema = new Schema({
-  user_ref: {
+  user: {
     type: Types.ObjectId,
     ref: 'User'
   },
