@@ -3,7 +3,7 @@ import { AttendanceModel } from "../../../models/attendance.js"
 const getAttendance = async (params) => {
   // No date was supplied, looking up all entries in attendance
   if (Object.keys(params).length === 0) {
-    return await AttendanceModel.find().populate({ path: 'messages', populate: { path: 'user', model: 'User' }}).exec()
+    return await AttendanceModel.find().populate({path: 'messages', populate: { path: 'user', model: 'User', populate: { path: 'group', model: 'Group', select: 'name'}}}).exec()
   }
 
   // Date range supplied, looking for entries between dates
