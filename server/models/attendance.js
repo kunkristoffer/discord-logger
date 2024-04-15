@@ -17,7 +17,10 @@ const AttendanceSchema = new Schema({
     type: Date,
     default: Date.now()
   },
-  messages: [{ type: Types.ObjectId, ref: 'Message' }],
+  messages: [{
+    type: Types.ObjectId,
+    ref: 'Message'
+  }],
 })
 
 export const AttendanceModel = model('Attendance', AttendanceSchema)
