@@ -1,25 +1,27 @@
 <script setup>
   import { onMounted, ref } from 'vue'
   import { useRoute } from 'vue-router'
-  import Accordion from 'primevue/accordion'
-  import AccordionTab from 'primevue/accordiontab'
-  import ToggleButton from 'primevue/togglebutton'
   import Tag from 'primevue/tag'
   import DataTable from 'primevue/datatable'
   import Column from 'primevue/column'
-  import Skeleton from 'primevue/skeleton'
-  import Calendar from 'primevue/calendar'
-  import Badge from 'primevue/badge'
-  import FloatLabel from 'primevue/floatlabel'
-  import Button from 'primevue/button'
   import Card from 'primevue/card'
 
   const route = useRoute()
   const user = ref(null)
+  const stats = ref(null)
 
   const fetchUser = async () => {
     const response = await fetch('http://localhost:2000/get/user/' + route.params.id)
     user.value = await response.json()
+  }
+
+  const calculateStats = () => {
+    const attendance = user.value.messages.length
+
+
+
+
+    stats.value = {...attendance}
   }
 
   const formatDate = (string) => {
@@ -28,6 +30,7 @@
 
   onMounted( async () => {
     fetchUser()
+    calculateStats()
   })
 </script>
 
@@ -37,7 +40,7 @@
     <div v-if="user" class="user">
       <div class="profile">
         <Card style="width: 50%; overflow: hidden">
-          <template #title>{{ user.user_name }}</template>
+          <template #title>{{ user.discord_username }}</template>
           <template #content>
             <div class="profile-fields">
               <span>
@@ -67,6 +70,7 @@
           <template #title>Statistics</template>
           <template #content>
             <div class="profile-fields">
+              {{ stats }}
               <span>
                 <b>Attendance</b>
                 <p>95%</p>

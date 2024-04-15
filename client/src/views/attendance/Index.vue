@@ -111,7 +111,7 @@
             </Column>
             <Column field="user_name" header="Name" >
               <template #body="slotProps">
-                <RouterLink :to="'/users/' + slotProps.data.user_ref">{{ slotProps.data.user_name }}</RouterLink>
+                <RouterLink :to="'/users/' + slotProps.data.user._id">{{ slotProps.data.user.discord_username }}</RouterLink>
               </template>
             </Column>
             <Column field="message" header="Message" style="width: 100%" ></Column>

@@ -27,7 +27,7 @@
         searchUsers.value = [...users.value]
       } else {
         searchUsers.value = users.value.filter((username) => {
-          return username.user_name.toLowerCase().startsWith(event.query.toLowerCase())
+          return username.discord_username.toLowerCase().startsWith(event.query.toLowerCase())
         })
       }
     }, 250)
@@ -42,7 +42,7 @@
   <main>
     <div class="user_search">
       <FloatLabel>
-        <AutoComplete v-model="searchInput" :suggestions="searchUsers" optionLabel="user_name" @complete="search" />
+        <AutoComplete v-model="searchInput" :suggestions="searchUsers" optionLabel="discord_username" @complete="search" />
         <label>Search for user</label>
       </FloatLabel>
       <FloatLabel>
@@ -52,15 +52,15 @@
     </div>
     <div class="user-table">
       <DataTable :value="users">
-        <Column field="user_name" header="Username" sortable >
+        <Column field="discord_username" header="Username" sortable >
           <template #body="slotProps">
-            <RouterLink :to="'/users/' + slotProps.data._id">{{ slotProps.data.user_name }}</RouterLink>
+            <RouterLink :to="'/users/' + slotProps.data._id">{{ slotProps.data.discord_username }}</RouterLink>
           </template>
         </Column>
-        <Column field="user_name" header="Group" sortable >
+        <Column field="discord_username" header="Group" sortable >
           <template #body="slotProps">
-            <!-- <RouterLink :to="'/group/' + slotProps.data._id">{{ slotProps.data.user_name }}</RouterLink> -->
-            {{ slotProps.data.user_name.slice(-3) }}
+            <!-- <RouterLink :to="'/group/' + slotProps.data._id">{{ slotProps.data.discord_username }}</RouterLink> -->
+            {{ slotProps.data.discord_username.slice(-3) }}
           </template>
         </Column>
         <Column field="joined" header="Joined">
