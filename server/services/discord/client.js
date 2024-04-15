@@ -1,7 +1,7 @@
 
 import { Client, Events, GatewayIntentBits } from 'discord.js'
 import { DISCORD_TOKEN, DISCORD_GUILD_ID, DISCORD_CHANNEL_ID } from '../../config/index.js'
-import postMessage from '../mongodb/create/message.js'
+import logMessage from '../mongodb/create/message.js'
 
 const connectDiscordBot = () => {
   const discordClient = new Client({
@@ -30,7 +30,7 @@ const connectDiscordBot = () => {
     // Only run function in specified guild & channel to avoid cross contamination
     if (event.guildId === DISCORD_GUILD_ID && event.channelId === DISCORD_CHANNEL_ID) {
       // Send payload to database handler
-      postMessage( event.author.id, event.author.displayName, new Date(event.createdTimestamp), event.content )
+      logMessage( event.author.id, event.author.displayName, new Date(event.createdTimestamp), event.content )
     }
   })
 }

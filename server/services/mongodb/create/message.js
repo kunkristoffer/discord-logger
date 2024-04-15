@@ -7,7 +7,7 @@ const validDate = (date) => {
   return date instanceof Date && !isNaN(date)
 }
 
-const postMessage = async (id, username, date, message) => {
+const logMessage = async (id, date, message) => {
   // Validate payload before continuing
   if (!validDate(date)) return console.log('Error updating messages collection, date is invalid or missing')
 
@@ -40,4 +40,4 @@ const postMessage = async (id, username, date, message) => {
   }
 }
 
-export default postMessage
+export default logMessage
