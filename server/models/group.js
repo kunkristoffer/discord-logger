@@ -5,6 +5,13 @@ const GroupSchema = new Schema({
     type: String,
     required: true,
   },
+  created:  {
+    type: Date,
+    default: Date.now(),
+  },
+  modified: {
+    type: Date,
+  },
   members: [{ type: Types.ObjectId, ref: 'User' }],
 })
 
