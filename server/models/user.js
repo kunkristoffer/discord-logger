@@ -21,7 +21,7 @@ const UserSchema = new Schema({
   updated: {
     type: Date,
   },
-  messages: {
+  group: {
     type: Types.ObjectId,
     ref: 'Group'
   },
