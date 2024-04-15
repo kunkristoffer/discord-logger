@@ -11,7 +11,7 @@ const UserSchema = new Schema({
   last_name: {
     type: String,
   },
-  user_name: {
+  discord_username: {
     type: String,
   },
   joined: {
