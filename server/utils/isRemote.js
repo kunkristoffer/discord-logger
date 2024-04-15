@@ -1,3 +1,8 @@
+/**
+ * Functions takes a string param and checks if it contains keywords indication user is working remote
+ * @param {*} string
+ * @returns
+ */
 export const isUserRemote = (string) => {
   // Check if input is string, if not, break
   if (typeof string !== 'string') return
