@@ -9,7 +9,7 @@ const getAttendance = async (params) => {
   // Date range supplied, looking for entries between dates
   if (params.from && params.to) {
     const date = { $gte: new Date(params.from), $lt: new Date(params.to) }
-    return await AttendanceModel.find({date:date}).populate({ path: 'messages', populate: { path: 'user', model: 'User' }}).exec()
+    return await AttendanceModel.find({date:date}).populate({path: 'messages', populate: { path: 'user', model: 'User', populate: { path: 'group', model: 'Group', select: 'name'}}}).exec()
   }
 
   // Looking up specific day
@@ -21,7 +21,7 @@ const getAttendance = async (params) => {
     to.setSeconds(59)
 
     const date = { $gte: new Date(params.from), $lt: new Date(to) }
-    return await AttendanceModel.find({date:date}).populate({ path: 'messages', populate: { path: 'user', model: 'User' }}).exec()
+    return await AttendanceModel.find({date:date}).populate({path: 'messages', populate: { path: 'user', model: 'User', populate: { path: 'group', model: 'Group', select: 'name'}}}).exec()
   }
 }
 
