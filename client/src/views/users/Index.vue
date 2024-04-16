@@ -7,6 +7,7 @@
   import AutoComplete from 'primevue/autocomplete'
   import FloatLabel from 'primevue/floatlabel'
   import Dropdown from 'primevue/dropdown'
+  import Tag from 'primevue/tag'
 
   const users = ref(null)
   const userList = ref(null)
@@ -45,12 +46,12 @@
   }
 
   const search = () => {
-    if (searchInput.value.discord_username) {
+    if (searchInput.value?.discord_username) {
       userList.value = users.value.filter((username) => {
         return username.discord_username.includes(searchInput.value.discord_username)
       })
     }
-    if (selectedGroup.value.name) {
+    if (selectedGroup.value?.name) {
       userList.value = users.value.filter((username) => {
         return username.group?.name.includes(selectedGroup.value.name)
       })
@@ -79,7 +80,11 @@
     </div>
     <div class="user-table">
       <DataTable :value="userList">
-        <Column field="discord_username" header="Username" sortable >
+        <Column field="discord_username" sortable >
+          <template #header>
+            <span style="flex:1">Username</span>
+            <Tag severity="secondary" icon="pi pi-user" :value="userList?.length"></Tag>
+          </template>
           <template #body="slotProps">
             <RouterLink :to="'/users/' + slotProps.data._id">{{ slotProps.data.discord_username }}</RouterLink>
           </template>
@@ -116,5 +121,8 @@
     align-items: center;
     padding: 1rem 0;
     gap:2rem;
+  }
+  .p-column-header-content {
+    display: flex;
   }
 </style>
