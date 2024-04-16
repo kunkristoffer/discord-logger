@@ -116,7 +116,7 @@
             </Column>
             <Column field="group" header="Group" >
               <template #body="slotProps">
-                <RouterLink :to="'/users/' + slotProps.data.user.group?.name">{{ slotProps.data.user.group?.name }}</RouterLink>
+                <RouterLink :to="'/groups/' + slotProps.data.user.group?.name">{{ slotProps.data.user.group?.name }}</RouterLink>
               </template>
             </Column>
             <Column field="message" header="Message" style="width: 100%" ></Column>

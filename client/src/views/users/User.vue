@@ -5,24 +5,49 @@
   import DataTable from 'primevue/datatable'
   import Column from 'primevue/column'
   import Card from 'primevue/card'
+  import FloatLabel from 'primevue/floatlabel'
+  import Dropdown from 'primevue/dropdown'
+  import Button from 'primevue/button'
 
   const route = useRoute()
   const user = ref(null)
   const stats = ref(null)
+  const groups = ref([])
+  const selectedGroup = ref(null)
 
   const fetchUser = async () => {
     const response = await fetch('http://localhost:2000/get/user/' + route.params.id)
     user.value = await response.json()
+
+    if (!user.value.group?.name) {
+      fetchGroups()
+    }
+  }
+  const fetchGroups = async () => {
+    const response = await fetch('http://localhost:2000/get/groups/')
+    groups.value = await response.json()
   }
 
-  const calculateStats = () => {
+  const addUserToGroup = async () => {
+    const userid = user.value._id
+    const groupid = selectedGroup.value._id
+
+    try {
+      const request = { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ "user": userid, "group": groupid }) }
+      const response = await fetch('http://localhost:2000/post/addusertogroup', request)
+      // console.log(await response.json())
+    } catch (err) {
+      console.log(err.message)
+    } finally {
+      fetchUser()
+    }
+  }
+
+  /* const calculateStats = () => {
     const attendance = user.value.messages.length
 
-
-
-
     stats.value = {...attendance}
-  }
+  } */
 
   const formatDate = (string) => {
     return new Date(string).toLocaleString()
@@ -30,7 +55,7 @@
 
   onMounted( async () => {
     fetchUser()
-    calculateStats()
+    // calculateStats()
   })
 </script>
 
@@ -63,10 +88,15 @@
                 <b>Discord uid</b>
                 <p>{{ user.discord_id }}</p>
               </span>
-              <span>
+              <span v-if="user.group" style="margin-top: 2rem;">
                 <b>Group</b>
                 <RouterLink :to="'/groups/' + user.group?.name">{{ user.group?.name }}</RouterLink>
               </span>
+              <FloatLabel v-if="!user.group" style="margin-top: 2rem;">
+                <Dropdown v-model="selectedGroup" :options="groups" optionLabel="name" placeholder="Select a Group"/>
+                <label>Add user to a group</label>
+                <Button @click="addUserToGroup" label="Add" :disabled="!selectedGroup" style="width: fit-content; margin-left: 1rem;"/>
+              </FloatLabel>
             </div>
           </template>
         </Card>
