@@ -9,7 +9,6 @@
   import Column from 'primevue/column'
   import Skeleton from 'primevue/skeleton'
   import Calendar from 'primevue/calendar'
-  import Badge from 'primevue/badge'
   import FloatLabel from 'primevue/floatlabel'
   import Button from 'primevue/button'
 
@@ -97,8 +96,9 @@
         <AccordionTab>
           <template #header>
             <span style="display: flex; justify-content: space-between; width: 100%;">
-              <span class="font-bold white-space-nowrap">{{ attendance.year }} / {{ attendance.month }} / {{ attendance.day }}</span>
-              <Badge :value="attendance.messages.length" severity="secondary"/>
+              <!-- <span class="font-bold white-space-nowrap">{{ attendance.year }} / {{ attendance.month }} / {{ attendance.day }}</span> -->
+              <span class="font-bold white-space-nowrap">{{ new Date(attendance.date).toDateString() }}</span>
+              <Tag severity="secondary" icon="pi pi-user" :value="attendance?.messages.length"></Tag>
             </span>
           </template>
           <DataTable :value="attendance.messages" size="small" tableStyle="min-width: 50rem" sortMode="multiple">
